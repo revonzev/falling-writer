@@ -14,6 +14,8 @@ config/name="Falling Writer"
 run/main_scene="res://falling_writer/windows/fun_text_editor.tscn"
 boot_splash/show_image=false
 boot_splash/bg_color=Color( 0.164706, 0.176471, 0.203922, 1 )
+config/icon="res://falling_writer_icon.svg"
+config/windows_native_icon="res://icon.ico"
 
 [editor_plugins]
 
