@@ -16,15 +16,15 @@ func _ready() -> void:
 	
 	match type:
 		Type.INCREASE:
-			hint_tooltip = "Increase Text Size"
+			hint_tooltip = "Increase Text Size (CTRL+-)"
 		Type.DECREASE:
-			hint_tooltip = "Decrease Text Size"
+			hint_tooltip = "Decrease Text Size (CTRL++)"
 		Type.NEW:
-			hint_tooltip = "New File"
+			hint_tooltip = "New File (CTRL+N)"
 		Type.SAVE:
-			hint_tooltip = "Save File"
+			hint_tooltip = "Save File (CTRL+S)"
 		Type.LOAD:
-			hint_tooltip = "Load File"
+			hint_tooltip = "Load File (CTRL+O)"
 
 
 func _on_TextEditFontResize_gui_input(event: InputEvent) -> void:
@@ -33,10 +33,10 @@ func _on_TextEditFontResize_gui_input(event: InputEvent) -> void:
 			and event.pressed:
 		match type:
 			Type.INCREASE:
-				font_size += 2
+				font_size += 4
 				_resize_font()
 			Type.DECREASE:
-				font_size = max(2, font_size - 2)
+				font_size = max(4, font_size - 4)
 				_resize_font()
 			Type.NEW:
 				file_dialog.mode = FileDialog.MODE_SAVE_FILE
@@ -46,6 +46,23 @@ func _on_TextEditFontResize_gui_input(event: InputEvent) -> void:
 			Type.LOAD:
 				file_dialog.mode = FileDialog.MODE_OPEN_FILE
 				file_dialog.popup()
+
+
+func _input(event):
+	if event.is_action_pressed("save_file") and type == Type.SAVE:
+		new_or_save_file()
+	elif event.is_action_pressed("open_file") and type == Type.LOAD:
+		file_dialog.mode = FileDialog.MODE_OPEN_FILE
+		file_dialog.popup()
+	elif event.is_action_pressed("new_file") and type == Type.NEW:
+		file_dialog.mode = FileDialog.MODE_SAVE_FILE
+		file_dialog.popup()
+	elif event.is_action("decrease_font_size") and type == Type.DECREASE:
+		font_size = max(4, font_size - 4)
+		_resize_font()
+	elif event.is_action("increase_font_size") and type == Type.INCREASE:
+		font_size += 4
+		_resize_font()
 
 
 func new_or_save_file() -> void:
