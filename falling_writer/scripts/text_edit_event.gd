@@ -5,7 +5,7 @@ export(Resource) var falling_label_box
 
 
 func _ready():
-	OS.min_window_size = get_tree().get_root().get_node("FunTextEditor").rect_min_size
+	OS.min_window_size = get_tree().get_root().get_node("FallingWriter").rect_min_size
 	randomize()
 
 
@@ -24,6 +24,7 @@ func _on_TextEdit_gui_input(event: InputEvent) -> void:
 		get_node("../../../../AudioStreamPlayer").play()
 
 		update_word_count()
+		update_char_count()
 
 
 func update_word_count() -> void:
@@ -31,3 +32,7 @@ func update_word_count() -> void:
 	var _err = regex.compile("\\S+")
 	var result := regex.search_all(text)
 	get_node("../HBoxContainer/WordCount/Label").text = str(result.size())
+	
+	
+func update_char_count() -> void:
+	get_node("../HBoxContainer/CharCount/Label").text = str(text.length())

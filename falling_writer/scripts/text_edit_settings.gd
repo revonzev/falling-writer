@@ -46,23 +46,34 @@ func _on_TextEditFontResize_gui_input(event: InputEvent) -> void:
 			Type.LOAD:
 				file_dialog.mode = FileDialog.MODE_OPEN_FILE
 				file_dialog.popup()
+		sprite_pressed_effect()
 
 
 func _input(event):
 	if event.is_action_pressed("save_file") and type == Type.SAVE:
+		sprite_pressed_effect()
 		new_or_save_file()
 	elif event.is_action_pressed("open_file") and type == Type.LOAD:
+		sprite_pressed_effect()
 		file_dialog.mode = FileDialog.MODE_OPEN_FILE
 		file_dialog.popup()
 	elif event.is_action_pressed("new_file") and type == Type.NEW:
+		sprite_pressed_effect()
 		file_dialog.mode = FileDialog.MODE_SAVE_FILE
 		file_dialog.popup()
 	elif event.is_action("decrease_font_size") and type == Type.DECREASE:
+		sprite_pressed_effect()
 		font_size = max(4, font_size - 4)
 		_resize_font()
 	elif event.is_action("increase_font_size") and type == Type.INCREASE:
+		sprite_pressed_effect()
 		font_size += 4
 		_resize_font()
+
+
+func sprite_pressed_effect() -> void:
+	$AnimationPlayer.stop()
+	$AnimationPlayer.play("pressed")
 
 
 func new_or_save_file() -> void:
