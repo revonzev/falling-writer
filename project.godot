@@ -10,7 +10,7 @@ config_version=4
 
 [application]
 
-config/name="Falling Writer v1.0.0"
+config/name="Falling Writer"
 run/main_scene="res://falling_writer/windows/falling_writer.tscn"
 boot_splash/show_image=false
 boot_splash/bg_color=Color( 0.164706, 0.176471, 0.203922, 1 )
