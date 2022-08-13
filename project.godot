@@ -17,6 +17,10 @@ boot_splash/bg_color=Color( 0.164706, 0.176471, 0.203922, 1 )
 config/icon="res://falling_writer_icon.svg"
 config/windows_native_icon="res://icon.ico"
 
+[autoload]
+
+UserSettings="*res://falling_writer/scripts/user_settings.gd"
+
 [editor_plugins]
 
 enabled=PoolStringArray(  )
