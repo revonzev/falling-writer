@@ -67,7 +67,7 @@ func load_settings() -> Dictionary:
 func write_settings(file_path := FILE_PATH, data := user_settings) -> void:
 	var file = File.new()
 	file.open(file_path, File.WRITE)
-	file.store_string(JSON.print(data, "\t"))
+	file.store_string(JSON.print(data, "\t", true))
 	file.close()
 	
 
