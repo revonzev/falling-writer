@@ -16,6 +16,8 @@ func _ready() -> void:
 	
 	# Old to new user settings
 	if user_settings["settings_version"] != loaded_settings["settings_version"]:
+		write_settings(OLD_FILE_PATH, loaded_settings)
+		
 		for key in ["settings_version", "software_version"]:
 			var _err = loaded_settings.erase(key)
 
