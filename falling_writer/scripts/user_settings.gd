@@ -52,7 +52,7 @@ func set_settings(data: Dictionary) -> void:
 			user_settings[key] = data[key]
 	
 
-func get_settings():
+func get_settings() -> Dictionary:
 	return user_settings
 	
 
