@@ -1,4 +1,4 @@
-[gd_scene load_steps=19 format=2]
+[gd_scene load_steps=21 format=2]
 
 [ext_resource path="res://falling_writer/assets/file_upload.svg" type="Texture" id=1]
 [ext_resource path="res://falling_writer/assets/sounds/typing/typing_1.wav" type="AudioStream" id=2]
@@ -17,6 +17,8 @@
 [ext_resource path="res://falling_writer/components/splash_screen.tscn" type="PackedScene" id=15]
 [ext_resource path="res://falling_writer/assets/save.svg" type="Texture" id=16]
 [ext_resource path="res://falling_writer/themes/dark.tres" type="Theme" id=17]
+[ext_resource path="res://falling_writer/assets/cog.png" type="Texture" id=18]
+[ext_resource path="res://falling_writer/components/settings_screen.tscn" type="PackedScene" id=19]
 
 [sub_resource type="RectangleShape2D" id=1]
 extents = Vector2( 512, 10 )
@@ -102,9 +104,15 @@ margin_right = 166.0
 type = 4
 icon_img_path = ExtResource( 1 )
 
-[node name="WordCount" type="ColorRect" parent="VBoxContainer/MarginContainer/VBoxContainer/HBoxContainer"]
+[node name="Settings" parent="VBoxContainer/MarginContainer/VBoxContainer/HBoxContainer" instance=ExtResource( 13 )]
 margin_left = 170.0
-margin_right = 230.0
+margin_right = 200.0
+type = 5
+icon_img_path = ExtResource( 18 )
+
+[node name="WordCount" type="ColorRect" parent="VBoxContainer/MarginContainer/VBoxContainer/HBoxContainer"]
+margin_left = 204.0
+margin_right = 264.0
 margin_bottom = 30.0
 rect_min_size = Vector2( 60, 0 )
 hint_tooltip = "Word Count"
@@ -122,8 +130,8 @@ __meta__ = {
 }
 
 [node name="CharCount" type="ColorRect" parent="VBoxContainer/MarginContainer/VBoxContainer/HBoxContainer"]
-margin_left = 234.0
-margin_right = 294.0
+margin_left = 268.0
+margin_right = 328.0
 margin_bottom = 30.0
 rect_min_size = Vector2( 60, 0 )
 hint_tooltip = "Word Count"
@@ -151,6 +159,9 @@ position = Vector2( 352, -725 )
 scale = Vector2( 3.58008, 3.58008 )
 texture = ExtResource( 7 )
 shadow_enabled = true
+
+[node name="SettingsScreen" parent="." instance=ExtResource( 19 )]
+unique_name_in_owner = true
 
 [node name="FileDialog" type="FileDialog" parent="."]
 unique_name_in_owner = true

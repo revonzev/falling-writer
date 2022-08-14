@@ -1,14 +1,15 @@
 extends ColorRect
 
-enum Type {INCREASE, DECREASE, NEW, SAVE, LOAD}
+enum Type {INCREASE, DECREASE, NEW, SAVE, LOAD, SETTINGS}
 export(Type) var type
 export(int) var font_size = 16
 export(NodePath) onready var sync_node_font_size
 export(Texture) var icon_img_path
 var file_path := ""
 
-onready var text_edit = get_node("../../TextEdit")
-onready var file_dialog = get_node("%FileDialog")
+onready var text_edit: TextEdit = get_node("../../TextEdit")
+onready var file_dialog: FileDialog = get_node("%FileDialog")
+onready var settings_screen: Popup = get_node("%SettingsScreen")
 
 
 func _ready() -> void:
@@ -25,6 +26,8 @@ func _ready() -> void:
 			hint_tooltip = "Save File (CTRL+S)"
 		Type.LOAD:
 			hint_tooltip = "Load File (CTRL+O)"
+		Type.SETTINGS:
+			hint_tooltip = "Open Settings Menu (ESC)"
 
 
 func _on_TextEditFontResize_gui_input(event: InputEvent) -> void:
@@ -46,10 +49,12 @@ func _on_TextEditFontResize_gui_input(event: InputEvent) -> void:
 			Type.LOAD:
 				file_dialog.mode = FileDialog.MODE_OPEN_FILE
 				file_dialog.popup()
+			Type.SETTINGS:
+				settings_screen.popup()
 		sprite_pressed_effect()
 
 
-func _input(event):
+func _unhandled_input(event):
 	if event.is_action_pressed("save_file") and type == Type.SAVE:
 		sprite_pressed_effect()
 		new_or_save_file()
@@ -69,6 +74,11 @@ func _input(event):
 		sprite_pressed_effect()
 		font_size += 4
 		_resize_font()
+	elif event.is_action_pressed("open_settings") and type == Type.SETTINGS:
+		if settings_screen.visible:
+			settings_screen.hide()
+		else:
+			settings_screen.popup()
 
 
 func sprite_pressed_effect() -> void:

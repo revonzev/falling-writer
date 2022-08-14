@@ -1,7 +1,6 @@
 extends Node
 
 const FILE_PATH = "./user_settings.json"
-const OLD_FILE_PATH = "./user_settings.json.old"
 
 var user_settings: Dictionary = get_default() setget set_settings, get_settings
 
@@ -11,30 +10,26 @@ func _ready() -> void:
 	
 	if settings_file_exsist():
 		loaded_settings = load_settings()
-	else:
-		write_settings()
 	
 	# Old to new user settings
-	if user_settings["settings_version"] != loaded_settings["settings_version"]:
-		write_settings(OLD_FILE_PATH, loaded_settings)
+	if user_settings["Settings version"] != loaded_settings["Settings version"]:
+		write_settings(FILE_PATH + ".old", loaded_settings)
 		
-		for key in ["settings_version", "software_version"]:
-			var _err = loaded_settings.erase(key)
-
-		loaded_settings.merge(user_settings)
+		loaded_settings["Settings version"] = user_settings["Settings version"]
 		
 		for key in loaded_settings:
 			if not key in user_settings.keys():
 				var _err = loaded_settings.erase(key)
-		
-		user_settings = loaded_settings
-		write_settings()
+
+	loaded_settings["Software version"] = user_settings["Software version"]
+	user_settings = loaded_settings
+	write_settings()
 
 
 func get_default() -> Dictionary:
 	return {
-		"settings_version": 0,
-		"software_version": "1.0.0",
+		"Settings version": 0,
+		"Software version": "1.0.0",
 	}
 	
 

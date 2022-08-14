@@ -1,0 +1,109 @@
+[gd_scene load_steps=4 format=2]
+
+[ext_resource path="res://fonts/Roboto-Regular.ttf" type="DynamicFontData" id=1]
+[ext_resource path="res://falling_writer/scripts/setting.gd" type="Script" id=2]
+
+[sub_resource type="DynamicFont" id=1]
+size = 20
+font_data = ExtResource( 1 )
+
+[node name="Setting" type="PanelContainer"]
+margin_top = 23.0
+margin_right = 984.0
+margin_bottom = 53.0
+script = ExtResource( 2 )
+
+[node name="MarginContainer" type="MarginContainer" parent="."]
+margin_left = 7.0
+margin_top = 7.0
+margin_right = 977.0
+margin_bottom = 37.0
+custom_constants/margin_left = 10
+
+[node name="HBoxContainer" type="HBoxContainer" parent="MarginContainer"]
+margin_left = 10.0
+margin_right = 970.0
+margin_bottom = 30.0
+rect_min_size = Vector2( 0, 30 )
+
+[node name="KeyLabel" type="Label" parent="MarginContainer/HBoxContainer"]
+unique_name_in_owner = true
+margin_top = 8.0
+margin_right = 478.0
+margin_bottom = 22.0
+size_flags_horizontal = 3
+text = "NULL"
+
+[node name="Value" type="HBoxContainer" parent="MarginContainer/HBoxContainer"]
+margin_left = 482.0
+margin_right = 960.0
+margin_bottom = 30.0
+size_flags_horizontal = 3
+size_flags_vertical = 3
+
+[node name="ValueLabel" type="Label" parent="MarginContainer/HBoxContainer/Value"]
+unique_name_in_owner = true
+visible = false
+margin_left = 242.0
+margin_top = 5.0
+margin_right = 480.0
+margin_bottom = 24.0
+size_flags_horizontal = 3
+size_flags_vertical = 6
+text = "NULL"
+
+[node name="TextEdit" type="TextEdit" parent="MarginContainer/HBoxContainer/Value"]
+unique_name_in_owner = true
+visible = false
+margin_right = 240.0
+margin_bottom = 40.0
+size_flags_horizontal = 3
+size_flags_vertical = 3
+
+[node name="NumOperator" type="HBoxContainer" parent="MarginContainer/HBoxContainer/Value"]
+visible = false
+margin_left = 210.0
+margin_right = 274.0
+margin_bottom = 40.0
+
+[node name="Increase" type="Button" parent="MarginContainer/HBoxContainer/Value/NumOperator"]
+margin_right = 30.0
+margin_bottom = 40.0
+rect_min_size = Vector2( 30, 30 )
+custom_fonts/font = SubResource( 1 )
+text = "+"
+
+[node name="Decrease" type="Button" parent="MarginContainer/HBoxContainer/Value/NumOperator"]
+margin_left = 34.0
+margin_right = 64.0
+margin_bottom = 40.0
+rect_min_size = Vector2( 30, 30 )
+custom_fonts/font = SubResource( 1 )
+text = "-"
+
+[node name="CheckButton" type="CheckButton" parent="MarginContainer/HBoxContainer/Value"]
+unique_name_in_owner = true
+visible = false
+margin_right = 444.0
+margin_bottom = 40.0
+size_flags_horizontal = 3
+size_flags_vertical = 3
+
+[node name="ColorPickerButton" type="ColorPickerButton" parent="MarginContainer/HBoxContainer/Value"]
+unique_name_in_owner = true
+visible = false
+margin_right = 485.0
+margin_bottom = 30.0
+size_flags_horizontal = 3
+size_flags_vertical = 3
+edit_alpha = false
+
+[node name="ResetButton" type="Button" parent="MarginContainer/HBoxContainer/Value"]
+unique_name_in_owner = true
+margin_right = 30.0
+margin_bottom = 30.0
+rect_min_size = Vector2( 30, 30 )
+custom_fonts/font = SubResource( 1 )
+text = "X"
+
+[connection signal="pressed" from="MarginContainer/HBoxContainer/Value/ResetButton" to="." method="_on_ResetButton_pressed"]
