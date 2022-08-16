@@ -33,6 +33,7 @@ tracks/0/keys = {
 }
 
 [node name="TextEditButton" type="ColorRect"]
+light_mask = 2
 margin_right = 30.0
 margin_bottom = 30.0
 rect_min_size = Vector2( 30, 30 )

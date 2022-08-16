@@ -30,6 +30,7 @@ rect_min_size = Vector2( 330, 330 )
 theme = ExtResource( 17 )
 
 [node name="BG" type="ColorRect" parent="."]
+light_mask = 2
 anchor_right = 1.0
 anchor_bottom = 1.0
 color = Color( 0.164706, 0.176471, 0.203922, 1 )
@@ -61,6 +62,7 @@ size_flags_vertical = 3
 custom_constants/separation = 15
 
 [node name="TextEdit" type="TextEdit" parent="VBoxContainer/MarginContainer/VBoxContainer"]
+light_mask = 2
 margin_right = 984.0
 margin_bottom = 515.0
 size_flags_horizontal = 3
@@ -155,10 +157,13 @@ position = Vector2( 512, 610 )
 shape = SubResource( 1 )
 
 [node name="Sun" type="Light2D" parent="Node2D"]
+light_mask = 2
 position = Vector2( 352, -725 )
 scale = Vector2( 3.58008, 3.58008 )
 texture = ExtResource( 7 )
+range_item_cull_mask = 2
 shadow_enabled = true
+shadow_item_cull_mask = 2
 
 [node name="SettingsScreen" parent="." instance=ExtResource( 19 )]
 unique_name_in_owner = true

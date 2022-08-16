@@ -84,15 +84,14 @@ text = "-"
 [node name="CheckButton" type="CheckButton" parent="MarginContainer/HBoxContainer/Value"]
 unique_name_in_owner = true
 visible = false
-margin_right = 444.0
+margin_right = 76.0
 margin_bottom = 40.0
-size_flags_horizontal = 3
 size_flags_vertical = 3
 
 [node name="ColorPickerButton" type="ColorPickerButton" parent="MarginContainer/HBoxContainer/Value"]
 unique_name_in_owner = true
 visible = false
-margin_right = 485.0
+margin_right = 444.0
 margin_bottom = 30.0
 size_flags_horizontal = 3
 size_flags_vertical = 3
