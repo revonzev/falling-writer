@@ -66,11 +66,11 @@ func _unhandled_input(event):
 		sprite_pressed_effect()
 		file_dialog.mode = FileDialog.MODE_SAVE_FILE
 		file_dialog.popup()
-	elif event.is_action("decrease_font_size") and type == Type.DECREASE:
+	elif event.is_action_pressed("decrease_font_size") and type == Type.DECREASE:
 		sprite_pressed_effect()
 		font_size = max(4, font_size - 4)
 		_resize_font()
-	elif event.is_action("increase_font_size") and type == Type.INCREASE:
+	elif event.is_action_pressed("increase_font_size") and type == Type.INCREASE:
 		sprite_pressed_effect()
 		font_size += 4
 		_resize_font()
