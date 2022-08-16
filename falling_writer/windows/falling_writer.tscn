@@ -2,12 +2,12 @@
 
 [ext_resource path="res://falling_writer/assets/file_upload.svg" type="Texture" id=1]
 [ext_resource path="res://falling_writer/assets/sounds/typing/typing_1.wav" type="AudioStream" id=2]
-[ext_resource path="res://falling_writer/assets/sounds/typing/typing_3.wav" type="AudioStream" id=3]
+[ext_resource path="res://falling_writer/assets/sounds/typing/typing_5.wav" type="AudioStream" id=3]
 [ext_resource path="res://falling_writer/assets/new.svg" type="Texture" id=4]
-[ext_resource path="res://falling_writer/assets/sounds/typing/typing_5.wav" type="AudioStream" id=5]
-[ext_resource path="res://falling_writer/assets/sounds/typing/typing_2.wav" type="AudioStream" id=6]
+[ext_resource path="res://falling_writer/assets/sounds/typing/typing_4.wav" type="AudioStream" id=5]
+[ext_resource path="res://falling_writer/assets/sounds/typing/typing_3.wav" type="AudioStream" id=6]
 [ext_resource path="res://falling_writer/assets/light.png" type="Texture" id=7]
-[ext_resource path="res://falling_writer/assets/sounds/typing/typing_4.wav" type="AudioStream" id=8]
+[ext_resource path="res://falling_writer/assets/sounds/typing/typing_2.wav" type="AudioStream" id=8]
 [ext_resource path="res://falling_writer/assets/plus.svg" type="Texture" id=9]
 [ext_resource path="res://falling_writer/assets/minus.svg" type="Texture" id=10]
 [ext_resource path="res://falling_writer/scripts/text_edit_event.gd" type="Script" id=11]
@@ -28,6 +28,9 @@ anchor_right = 1.0
 anchor_bottom = 1.0
 rect_min_size = Vector2( 330, 330 )
 theme = ExtResource( 17 )
+script = ExtResource( 11 )
+typing_sounds = [ ExtResource( 2 ), ExtResource( 8 ), ExtResource( 6 ), ExtResource( 5 ), ExtResource( 3 ) ]
+falling_label_box = ExtResource( 14 )
 
 [node name="BG" type="ColorRect" parent="."]
 light_mask = 2
@@ -62,15 +65,13 @@ size_flags_vertical = 3
 custom_constants/separation = 15
 
 [node name="TextEdit" type="TextEdit" parent="VBoxContainer/MarginContainer/VBoxContainer"]
+unique_name_in_owner = true
 light_mask = 2
 margin_right = 984.0
 margin_bottom = 515.0
 size_flags_horizontal = 3
 size_flags_vertical = 3
 wrap_enabled = true
-script = ExtResource( 11 )
-typing_sounds = [ ExtResource( 2 ), ExtResource( 6 ), ExtResource( 3 ), ExtResource( 8 ), ExtResource( 5 ) ]
-falling_label_box = ExtResource( 14 )
 
 [node name="HBoxContainer" type="HBoxContainer" parent="VBoxContainer/MarginContainer/VBoxContainer"]
 margin_top = 530.0
@@ -113,6 +114,7 @@ type = 5
 icon_img_path = ExtResource( 18 )
 
 [node name="WordCount" type="ColorRect" parent="VBoxContainer/MarginContainer/VBoxContainer/HBoxContainer"]
+unique_name_in_owner = true
 margin_left = 204.0
 margin_right = 264.0
 margin_bottom = 30.0
@@ -132,6 +134,7 @@ __meta__ = {
 }
 
 [node name="CharCount" type="ColorRect" parent="VBoxContainer/MarginContainer/VBoxContainer/HBoxContainer"]
+unique_name_in_owner = true
 margin_left = 268.0
 margin_right = 328.0
 margin_bottom = 30.0
@@ -148,6 +151,7 @@ align = 1
 valign = 1
 
 [node name="Node2D" type="Node2D" parent="."]
+unique_name_in_owner = true
 script = ExtResource( 12 )
 
 [node name="WindowFloor" type="StaticBody2D" parent="Node2D"]
@@ -182,10 +186,11 @@ __meta__ = {
 }
 
 [node name="AudioStreamPlayer" type="AudioStreamPlayer" parent="."]
+unique_name_in_owner = true
 stream = ExtResource( 2 )
 
 [node name="SplashScreen" parent="." instance=ExtResource( 15 )]
 
-[connection signal="gui_input" from="VBoxContainer/MarginContainer/VBoxContainer/TextEdit" to="VBoxContainer/MarginContainer/VBoxContainer/TextEdit" method="_on_TextEdit_gui_input"]
+[connection signal="gui_input" from="VBoxContainer/MarginContainer/VBoxContainer/TextEdit" to="." method="_on_TextEdit_gui_input"]
 [connection signal="file_selected" from="FileDialog" to="VBoxContainer/MarginContainer/VBoxContainer/HBoxContainer/Save" method="_on_FileDialog_file_selected"]
 [connection signal="file_selected" from="FileDialog" to="VBoxContainer/MarginContainer/VBoxContainer/HBoxContainer/Load" method="_on_FileDialog_file_selected"]

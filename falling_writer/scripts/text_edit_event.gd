@@ -1,7 +1,13 @@
-extends TextEdit
+extends Control
 
 export(Array, Resource) var typing_sounds
 export(Resource) var falling_label_box
+
+onready var text_edit: TextEdit = get_node("%TextEdit")
+onready var node_2d: Node2D = get_node("%Node2D")
+onready var audio: AudioStreamPlayer = get_node("%AudioStreamPlayer")
+onready var word_count: Label = get_node("%WordCount/Label")
+onready var char_count: Label = get_node("%CharCount/Label")
 
 
 func _ready():
@@ -18,10 +24,10 @@ func _on_TextEdit_gui_input(event: InputEvent) -> void:
 			FallingLabelBox.position.x = rand_range(0, OS.window_size.x)
 			FallingLabelBox.position.y = -FallingLabelBox.get_node("ColorRect").rect_size.x / 2
 
-			get_node("../../../../Node2D").add_child(FallingLabelBox)
+			node_2d.add_child(FallingLabelBox)
 
-		get_node("../../../../AudioStreamPlayer").stream = typing_sounds[randi() % typing_sounds.size()]
-		get_node("../../../../AudioStreamPlayer").play()
+		audio.stream = typing_sounds[randi() % typing_sounds.size()]
+		audio.play()
 
 		update_word_count()
 		update_char_count()
@@ -30,9 +36,9 @@ func _on_TextEdit_gui_input(event: InputEvent) -> void:
 func update_word_count() -> void:
 	var regex := RegEx.new()
 	var _err = regex.compile("\\S+")
-	var result := regex.search_all(text)
-	get_node("../HBoxContainer/WordCount/Label").text = str(result.size())
+	var result := regex.search_all(text_edit.text)
+	word_count.text = str(result.size())
 	
 	
 func update_char_count() -> void:
-	get_node("../HBoxContainer/CharCount/Label").text = str(text.length())
+	char_count.text = str(text_edit.text.length())
