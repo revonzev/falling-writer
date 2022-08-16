@@ -38,7 +38,12 @@ func set_setting(key: String, value) -> void:
 	
 
 func get_setting(key):
-	return user_settings[key]
+	if user_settings.has(key):
+		return user_settings[key]
+	else:
+		user_settings[key] = get_default()[key]
+		write_settings()
+		return user_settings[key]
 	
 
 func set_settings(data: Dictionary) -> void:
