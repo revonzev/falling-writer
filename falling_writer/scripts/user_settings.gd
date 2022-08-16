@@ -30,6 +30,8 @@ func get_default() -> Dictionary:
 	return {
 		"Settings version": 0,
 		"Software version": "1.0.0",
+		"Falling box color": "#eea243",
+		"Falling box text color": "#000000"
 	}
 	
 
