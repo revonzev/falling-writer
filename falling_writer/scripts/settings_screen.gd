@@ -19,7 +19,6 @@ func _on_SettingsScreen_popup_hide():
 	for item in items:
 		if not item in ["Settings version", "Software version"]:
 			UserSettings.set_setting(item, items[item].get_value())
-	print(UserSettings.get_settings())
 	UserSettings.write_settings()
 
 
