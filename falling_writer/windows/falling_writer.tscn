@@ -115,6 +115,7 @@ icon_img_path = ExtResource( 18 )
 
 [node name="WordCount" type="ColorRect" parent="VBoxContainer/MarginContainer/VBoxContainer/HBoxContainer"]
 unique_name_in_owner = true
+light_mask = 2
 margin_left = 204.0
 margin_right = 264.0
 margin_bottom = 30.0
@@ -135,6 +136,7 @@ __meta__ = {
 
 [node name="CharCount" type="ColorRect" parent="VBoxContainer/MarginContainer/VBoxContainer/HBoxContainer"]
 unique_name_in_owner = true
+light_mask = 2
 margin_left = 268.0
 margin_right = 328.0
 margin_bottom = 30.0
