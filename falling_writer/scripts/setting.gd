@@ -14,43 +14,9 @@ var _key := ""
 
 
 func set_setting(key:=_key):
-	if _key == "":
-		set_key(key)
-	set_value(UserSettings.get_setting(_key))
-
-
-func set_key(key: String):
 	_key = key
 	_key_label.text = _key
-	
-
-func set_value(value):
-	if _key in ["Settings version", "Software version"]:
-		_value_label.show()
-		_value_label.set_text(str(value))
-		_input = _inputs.LABEL
-		_reset_btn.hide()
-	elif value is String:
-		if value[0] != "#":
-			_text_edit.show()
-			_text_edit.set_text(str(value))
-			_input = _inputs.STRING
-		else:
-			_color_picker.show()
-			_color_picker.set_pick_color(Color(value))
-			_input = _inputs.COLOR
-	elif value is int:
-		_text_edit.show()
-		_text_edit.set_text(str(value))
-		_input = _inputs.INTEGER
-	elif value is float:
-		_text_edit.show()
-		_text_edit.set_text(str(value))
-		_input = _inputs.DECIMAL
-	elif value is bool:
-		_check_btn.show()
-		_check_btn.pressed = value
-		_input = _inputs.BOOL
+	_set_value(UserSettings.get_setting(_key))
 
 
 func get_value():
@@ -78,3 +44,32 @@ func _on_ResetButton_pressed():
 		_text_edit.set_text(str(default))
 	elif _input == _inputs.BOOL:
 		_check_btn.pressed = default
+
+
+func _set_value(value):
+	if _key in ["Settings version", "Software version"]:
+		_value_label.show()
+		_value_label.set_text(str(value))
+		_input = _inputs.LABEL
+		_reset_btn.hide()
+	elif value is String:
+		if value[0] != "#":
+			_text_edit.show()
+			_text_edit.set_text(str(value))
+			_input = _inputs.STRING
+		else:
+			_color_picker.show()
+			_color_picker.set_pick_color(Color(value))
+			_input = _inputs.COLOR
+	elif value is int:
+		_text_edit.show()
+		_text_edit.set_text(str(value))
+		_input = _inputs.INTEGER
+	elif value is float:
+		_text_edit.show()
+		_text_edit.set_text(str(value))
+		_input = _inputs.DECIMAL
+	elif value is bool:
+		_check_btn.show()
+		_check_btn.pressed = value
+		_input = _inputs.BOOL
