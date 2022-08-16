@@ -14,3 +14,6 @@ data_*/
 # Project-specific ignores
 user_settings.json
 user_settings.json.old
+
+# User-specific ignores
+*.code-workspace
