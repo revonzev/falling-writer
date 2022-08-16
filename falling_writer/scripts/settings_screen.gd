@@ -1,14 +1,17 @@
-extends VBoxContainer
+extends Popup
 
-var setting_scn := preload("res://falling_writer/components/setting.tscn")
+const setting_scn := preload("res://falling_writer/components/setting.tscn")
+
 var items := {}
+
+onready var settings_container = get_node("%SettingsContainer")
 
 
 func _ready():
 	var settings := UserSettings.get_settings()
 	for setting in settings:
 		items[setting] = setting_scn.instance()
-		add_child(items[setting])
+		settings_container.add_child(items[setting])
 		items[setting].set_setting(setting)
 
 
@@ -21,4 +24,4 @@ func _on_SettingsScreen_popup_hide():
 
 
 func _on_CloseButton_pressed():
-	owner.hide()
+	hide()

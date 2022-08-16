@@ -7,6 +7,7 @@
 anchor_right = 1.0
 anchor_bottom = 1.0
 theme = ExtResource( 1 )
+script = ExtResource( 2 )
 
 [node name="ScrollContainer" type="ScrollContainer" parent="."]
 anchor_right = 1.0
@@ -30,16 +31,16 @@ margin_top = 10.0
 margin_right = -20.0
 margin_bottom = -10.0
 
-[node name="VBoxContainer" type="VBoxContainer" parent="ScrollContainer/Control/VBoxContainer"]
-margin_right = 994.0
-margin_bottom = 19.0
-script = ExtResource( 2 )
-
-[node name="CenterContainer" type="CenterContainer" parent="ScrollContainer/Control/VBoxContainer/VBoxContainer"]
+[node name="SettingsContainer" type="VBoxContainer" parent="ScrollContainer/Control/VBoxContainer"]
+unique_name_in_owner = true
 margin_right = 994.0
 margin_bottom = 19.0
 
-[node name="Label" type="Label" parent="ScrollContainer/Control/VBoxContainer/VBoxContainer/CenterContainer"]
+[node name="CenterContainer" type="CenterContainer" parent="ScrollContainer/Control/VBoxContainer/SettingsContainer"]
+margin_right = 994.0
+margin_bottom = 19.0
+
+[node name="Label" type="Label" parent="ScrollContainer/Control/VBoxContainer/SettingsContainer/CenterContainer"]
 margin_left = 459.0
 margin_right = 534.0
 margin_bottom = 19.0
@@ -52,5 +53,5 @@ margin_bottom = 63.0
 rect_min_size = Vector2( 0, 40 )
 text = "Close"
 
-[connection signal="popup_hide" from="." to="ScrollContainer/Control/VBoxContainer/VBoxContainer" method="_on_SettingsScreen_popup_hide"]
-[connection signal="pressed" from="ScrollContainer/Control/VBoxContainer/CloseButton" to="ScrollContainer/Control/VBoxContainer/VBoxContainer" method="_on_CloseButton_pressed"]
+[connection signal="popup_hide" from="." to="ScrollContainer/Control/VBoxContainer/SettingsContainer" method="_on_SettingsScreen_popup_hide"]
+[connection signal="pressed" from="ScrollContainer/Control/VBoxContainer/CloseButton" to="." method="_on_CloseButton_pressed"]
