@@ -2,9 +2,7 @@ extends ColorRect
 
 enum _BtnTypes {INCREASE, DECREASE, NEW, SAVE, LOAD, SETTINGS}
 
-export(NodePath) onready var _sync_node_font_size
 export(_BtnTypes) var _type
-export(int) var font_size = 16
 export(Texture) var _icon_img_path
 
 var _file_path := ""
@@ -15,6 +13,9 @@ onready var _settings_screen: Popup = get_node("%SettingsScreen")
 
 
 func _ready() -> void:
+	var _err = UserSettings.connect("settings_written", self, "_settings_changed")
+	_settings_changed()
+
 	$Sprite.texture = _icon_img_path
 	
 	match _type:
@@ -30,6 +31,8 @@ func _ready() -> void:
 			hint_tooltip = "Load File (CTRL+O)"
 		_BtnTypes.SETTINGS:
 			hint_tooltip = "Open Settings Menu (ESC)"
+		
+	_resize_font(UserSettings.get_setting("Text editor font size"))
 
 
 func _unhandled_input(event):
@@ -46,12 +49,10 @@ func _unhandled_input(event):
 		_file_dialog.popup()
 	elif event.is_action_pressed("decrease_font_size") and _type == _BtnTypes.DECREASE:
 		_sprite_pressed_effect()
-		font_size = max(4, font_size - 4)
-		_resize_font()
+		_resize_font(int(max(4, UserSettings.get_setting("Text editor font size") - 4)))
 	elif event.is_action_pressed("increase_font_size") and _type == _BtnTypes.INCREASE:
 		_sprite_pressed_effect()
-		font_size += 4
-		_resize_font()
+		_resize_font(UserSettings.get_setting("Text editor font size")+4)
 	elif event.is_action_pressed("open_settings") and _type == _BtnTypes.SETTINGS:
 		if _settings_screen.visible:
 			_settings_screen.hide()
@@ -68,6 +69,10 @@ func shortcuts(key: String) -> void:
 			_file_dialog.popup()
 
 
+func _settings_changed() -> void:
+	_resize_font(UserSettings.get_setting("Text editor font size"))
+
+
 func _sprite_pressed_effect() -> void:
 	$AnimationPlayer.stop()
 	$AnimationPlayer.play("pressed")
@@ -81,12 +86,12 @@ func _new_or_save_file() -> void:
 		_file_dialog.popup()
 
 
-func _resize_font() -> void:
+func _resize_font(value: int) -> void:
+	UserSettings.set_setting("Text editor font size", value)
 	var dynamic_font = DynamicFont.new()
 	dynamic_font.font_data = load("res://fonts/Roboto-Regular.ttf")
-	dynamic_font.size = font_size
+	dynamic_font.size = UserSettings.get_setting("Text editor font size")
 	_text_edit.set("custom_fonts/font", dynamic_font)
-	get_node(_sync_node_font_size).font_size = font_size
 
 
 func _save_data(content: String, path: String) -> void:
@@ -121,11 +126,9 @@ func _on_TextEditFontResize_gui_input(event: InputEvent) -> void:
 			and event.pressed:
 		match _type:
 			_BtnTypes.INCREASE:
-				font_size += 4
-				_resize_font()
+				_resize_font(int(max(4, UserSettings.get_setting("Text editor font size") - 4)))
 			_BtnTypes.DECREASE:
-				font_size = max(4, font_size - 4)
-				_resize_font()
+				_resize_font(UserSettings.get_setting("Text editor font size")+4)
 			_BtnTypes.NEW:
 				_file_dialog.mode = FileDialog.MODE_SAVE_FILE
 				_file_dialog.popup()
