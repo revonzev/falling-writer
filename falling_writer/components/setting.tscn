@@ -105,5 +105,4 @@ rect_min_size = Vector2( 30, 30 )
 custom_fonts/font = SubResource( 1 )
 text = "X"
 
-[connection signal="visibility_changed" from="." to="." method="_on_Setting_visibility_changed"]
 [connection signal="pressed" from="MarginContainer/HBoxContainer/Value/ResetButton" to="." method="_on_ResetButton_pressed"]

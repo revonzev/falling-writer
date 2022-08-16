@@ -53,5 +53,6 @@ margin_bottom = 63.0
 rect_min_size = Vector2( 0, 40 )
 text = "Close"
 
-[connection signal="popup_hide" from="." to="ScrollContainer/Control/VBoxContainer/SettingsContainer" method="_on_SettingsScreen_popup_hide"]
+[connection signal="about_to_show" from="." to="." method="_on_SettingsScreen_about_to_show"]
+[connection signal="popup_hide" from="." to="." method="_on_SettingsScreen_popup_hide"]
 [connection signal="pressed" from="ScrollContainer/Control/VBoxContainer/CloseButton" to="." method="_on_CloseButton_pressed"]

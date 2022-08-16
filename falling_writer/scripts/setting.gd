@@ -78,7 +78,3 @@ func _on_ResetButton_pressed():
 		_text_edit.set_text(str(default))
 	elif _input == _inputs.BOOL:
 		_check_btn.pressed = default
-
-
-func _on_Setting_visibility_changed():
-	set_setting()

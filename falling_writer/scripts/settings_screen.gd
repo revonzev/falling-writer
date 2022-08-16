@@ -25,3 +25,8 @@ func _on_SettingsScreen_popup_hide():
 
 func _on_CloseButton_pressed():
 	hide()
+
+
+func _on_SettingsScreen_about_to_show():
+	for item in items:
+		items[item].set_setting()
