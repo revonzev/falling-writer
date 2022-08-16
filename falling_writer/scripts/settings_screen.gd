@@ -9,7 +9,7 @@ func _ready():
 	for setting in settings:
 		items[setting] = setting_scn.instance()
 		add_child(items[setting])
-		items[setting].set_setting(setting, settings[setting])
+		items[setting].set_setting(setting)
 
 
 func _on_SettingsScreen_popup_hide():

@@ -13,9 +13,10 @@ export(_inputs) var _input = _inputs.LABEL
 var _key := ""
 
 
-func set_setting(key, value):
-	set_key(key)
-	set_value(value)
+func set_setting(key:=_key):
+	if _key == "":
+		set_key(key)
+	set_value(UserSettings.get_setting(_key))
 
 
 func set_key(key: String):
@@ -77,3 +78,7 @@ func _on_ResetButton_pressed():
 		_text_edit.set_text(str(default))
 	elif _input == _inputs.BOOL:
 		_check_btn.pressed = default
+
+
+func _on_Setting_visibility_changed():
+	set_setting()
