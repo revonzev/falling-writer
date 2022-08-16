@@ -2,8 +2,6 @@ extends Node
 
 signal settings_written
 
-const _FILE_PATH = "./user_settings.json"
-
 var user_settings: Dictionary = get_default() setget set_settings, get_settings
 
 
@@ -15,7 +13,7 @@ func _ready() -> void:
 	
 	# Old to new user settings
 	if user_settings["Settings version"] != loaded_settings["Settings version"]:
-		write_settings(_FILE_PATH + ".old", loaded_settings)
+		write_settings(_get_settings_file_path() + ".old", loaded_settings)
 		
 		loaded_settings["Settings version"] = user_settings["Settings version"]
 		
@@ -63,7 +61,7 @@ func get_settings() -> Dictionary:
 	
 
 
-func write_settings(file_path := _FILE_PATH, data := user_settings) -> void:
+func write_settings(file_path := _get_settings_file_path(), data := user_settings) -> void:
 	var file = File.new()
 	file.open(file_path, File.WRITE)
 	file.store_string(JSON.print(data, "\t", true))
@@ -73,12 +71,19 @@ func write_settings(file_path := _FILE_PATH, data := user_settings) -> void:
 
 func _settings_file_exist() -> bool:
 	var file = File.new()
-	return file.open(_FILE_PATH, File.READ) == OK
+	return file.open(_get_settings_file_path(), File.READ) == OK
 
 
 func _load_settings() -> Dictionary:
 	var file = File.new()
-	file.open(_FILE_PATH, File.READ)
+	file.open(_get_settings_file_path(), File.READ)
 	var content = parse_json(file.get_as_text())
 	file.close()
 	return content
+
+
+func _get_settings_file_path() -> String:
+	if OS.is_debug_build():
+		return "user://user_settings.json"
+	else:
+		return "./user_settings.json"
