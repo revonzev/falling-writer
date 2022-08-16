@@ -1,5 +1,7 @@
 extends Node
 
+signal settings_written
+
 const FILE_PATH = "./user_settings.json"
 
 var user_settings: Dictionary = get_default() setget set_settings, get_settings
@@ -31,7 +33,8 @@ func get_default() -> Dictionary:
 		"Settings version": 0,
 		"Software version": "1.0.0",
 		"Falling box color": "#eea243",
-		"Falling box text color": "#000000"
+		"Falling box text color": "#000000",
+		"Sun": 1.0
 	}
 	
 
@@ -71,6 +74,7 @@ func write_settings(file_path := FILE_PATH, data := user_settings) -> void:
 	file.open(file_path, File.WRITE)
 	file.store_string(JSON.print(data, "\t", true))
 	file.close()
+	emit_signal("settings_written")
 	
 
 func settings_file_exsist() -> bool:
