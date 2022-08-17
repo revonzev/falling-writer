@@ -17,3 +17,4 @@ user_settings.json.old
 
 # User-specific ignores
 *.code-workspace
+.vscode
