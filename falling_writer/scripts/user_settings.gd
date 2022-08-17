@@ -86,6 +86,6 @@ func _load_settings() -> Dictionary:
 
 func _get_settings_file_path() -> String:
 	if OS.is_debug_build():
-		return "user://user_settings.json"
-	else:
 		return "./user_settings.json"
+	else:
+		return "user://user_settings.json"
