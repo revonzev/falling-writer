@@ -23,20 +23,25 @@ func _ready():
 
 func _on_TextEdit_gui_input(event: InputEvent) -> void:
 	if event is InputEventKey and event.pressed:
-		if event.unicode > 20 and event.unicode < 126:
-			var FallingLabelBox = _falling_label_box.instance()
-
-			FallingLabelBox.get_node("Label").text = char(event.unicode)
-			FallingLabelBox.position.x = rand_range(0, OS.window_size.x)
-			FallingLabelBox.position.y = -FallingLabelBox.get_node("ColorRect").rect_size.x / 2
-
-			_node_2d.add_child(FallingLabelBox)
-
-		_audio.stream = _typing_sounds[randi() % _typing_sounds.size()]
-		_audio.play()
+		if UserSettings.get_setting("Falling box") and event.unicode > 20 and event.unicode < 126:
+			_instance_falling_box(char(event.unicode))
+		
+		if UserSettings.get_setting("Typing sounds"):
+			_audio.stream = _typing_sounds[randi() % _typing_sounds.size()]
+			_audio.play()
 
 		_update_word_count()
 		_update_char_count()
+
+
+func _instance_falling_box(text: String):
+	var FallingLabelBox = _falling_label_box.instance()
+
+	FallingLabelBox.get_node("Label").text = text
+	FallingLabelBox.position.x = rand_range(0, OS.window_size.x)
+	FallingLabelBox.position.y = -FallingLabelBox.get_node("ColorRect").rect_size.x / 2
+
+	_node_2d.add_child(FallingLabelBox)	
 
 
 func _update_word_count() -> void:
