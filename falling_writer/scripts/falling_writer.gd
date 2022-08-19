@@ -1,4 +1,4 @@
-extends Control
+extends Node
 
 const _falling_label_box: PackedScene = preload("res://falling_writer/components/falling_lable_box.tscn")
 const _typing_sounds = [
@@ -17,7 +17,7 @@ onready var _char_count: Label = get_node("%CharCount/Label")
 
 
 func _ready():
-	OS.min_window_size = get_tree().get_root().get_node("FallingWriter").rect_min_size
+	OS.min_window_size = get_tree().get_root().get_node("FallingWriter/Behind").rect_min_size
 	randomize()
 
 
