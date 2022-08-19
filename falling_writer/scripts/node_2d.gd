@@ -1,8 +1,8 @@
 extends Node2D
 
-onready var _window_floor := $WindowFloor
-onready var _window_floor_shape := $WindowFloor/CollisionShape2D
-onready var _sun := $Sun
+onready var _window_floor: StaticBody2D = $WindowFloor
+onready var _window_floor_shape: Shape2D = $WindowFloor/CollisionShape2D.shape
+onready var _sun: Light2D = $Sun
 
 
 func _ready():
@@ -12,7 +12,7 @@ func _ready():
 	_settings_changed()
 
 func _window_updated():
-	_window_floor_shape.shape.set_extents(Vector2(OS.window_size.x / 2,10))
+	_window_floor_shape.set_extents(Vector2(OS.window_size.x / 2,10))
 	_window_floor.position.y = OS.window_size.y + _window_floor_shape.extents.y
 	_window_floor.position.x = OS.window_size.x / 2
 	_sun.position.x = OS.window_size.x / 2
