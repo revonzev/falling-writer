@@ -126,9 +126,9 @@ func _on_TextEditFontResize_gui_input(event: InputEvent) -> void:
 			and event.pressed:
 		match _type:
 			_BtnTypes.INCREASE:
-				_resize_font(int(max(4, UserSettings.get_setting("Text editor font size") - 4)))
-			_BtnTypes.DECREASE:
 				_resize_font(UserSettings.get_setting("Text editor font size")+4)
+			_BtnTypes.DECREASE:
+				_resize_font(int(max(4, UserSettings.get_setting("Text editor font size") - 4)))
 			_BtnTypes.NEW:
 				_file_dialog.mode = FileDialog.MODE_SAVE_FILE
 				_file_dialog.popup()
