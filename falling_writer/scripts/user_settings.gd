@@ -36,6 +36,7 @@ func get_default() -> Dictionary:
 		"Sun": 1.0,
 		"Text editor font size": 16,
 		"Typing sounds": true,
+		"New file opens file dialog": false,
 	}
 	
 

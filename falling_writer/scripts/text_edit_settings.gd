@@ -38,15 +38,19 @@ func _ready() -> void:
 func _unhandled_input(event):
 	if event.is_action_pressed("save_file") and _type == _BtnTypes.SAVE:
 		_sprite_pressed_effect()
-		_new_or_save_file()
+		_save_file()
 	elif event.is_action_pressed("open_file") and _type == _BtnTypes.LOAD:
 		_sprite_pressed_effect()
 		_file_dialog.mode = FileDialog.MODE_OPEN_FILE
 		_file_dialog.popup()
 	elif event.is_action_pressed("new_file") and _type == _BtnTypes.NEW:
 		_sprite_pressed_effect()
-		_file_dialog.mode = FileDialog.MODE_SAVE_FILE
-		_file_dialog.popup()
+		if UserSettings.get_setting("New file opens file dialog"):
+			_file_dialog.mode = FileDialog.MODE_SAVE_FILE
+			_file_dialog.popup()
+		else:
+			_file_path = ""
+			_text_edit.text = ""
 	elif event.is_action_pressed("decrease_font_size") and _type == _BtnTypes.DECREASE:
 		_sprite_pressed_effect()
 		_resize_font(int(max(4, UserSettings.get_setting("Text editor font size") - 4)))
@@ -63,7 +67,7 @@ func _unhandled_input(event):
 func shortcuts(key: String) -> void:
 	match key:
 		"save":
-			_new_or_save_file()
+			_save_file()
 		"open":
 			_file_dialog.mode = FileDialog.MODE_OPEN_FILE
 			_file_dialog.popup()
@@ -78,7 +82,7 @@ func _sprite_pressed_effect() -> void:
 	$AnimationPlayer.play("pressed")
 
 
-func _new_or_save_file() -> void:
+func _save_file() -> void:
 	if _file_path != "":
 		_save_data(_text_edit.text, _file_path)
 	else:
@@ -130,10 +134,14 @@ func _on_TextEditFontResize_gui_input(event: InputEvent) -> void:
 			_BtnTypes.DECREASE:
 				_resize_font(int(max(4, UserSettings.get_setting("Text editor font size") - 4)))
 			_BtnTypes.NEW:
-				_file_dialog.mode = FileDialog.MODE_SAVE_FILE
-				_file_dialog.popup()
+				if UserSettings.get_setting("New file opens file dialog"):
+					_file_dialog.mode = FileDialog.MODE_SAVE_FILE
+					_file_dialog.popup()
+				else:
+					_file_path = ""
+					_text_edit.text = ""
 			_BtnTypes.SAVE:
-				_new_or_save_file()
+				_save_file()
 			_BtnTypes.LOAD:
 				_file_dialog.mode = FileDialog.MODE_OPEN_FILE
 				_file_dialog.popup()
