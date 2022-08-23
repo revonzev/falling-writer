@@ -1,6 +1,6 @@
 extends PanelContainer
 
-enum _inputs {LABEL, STRING, INTEGER, DECIMAL, COLOR, BOOL}
+enum _inputs { LABEL, STRING, INTEGER, DECIMAL, COLOR, BOOL }
 
 onready var _key_label: Label = get_node("%KeyLabel")
 onready var _text_edit: TextEdit = get_node("%TextEdit")
@@ -13,7 +13,7 @@ export(_inputs) var _input = _inputs.LABEL
 var _key := ""
 
 
-func set_setting(key:=_key):
+func set_setting(key := _key):
 	_key = key
 	_key_label.text = _key
 	_set_value(UserSettings.get_setting(_key))

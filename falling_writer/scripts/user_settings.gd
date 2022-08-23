@@ -7,16 +7,16 @@ var user_settings: Dictionary = get_default() setget set_settings, get_settings
 
 func _ready() -> void:
 	var loaded_settings := user_settings
-	
+
 	if _settings_file_exist():
 		loaded_settings = _load_settings()
-	
+
 	# Old to new user settings
 	if user_settings["Settings version"] != loaded_settings["Settings version"]:
 		write_settings(_get_settings_file_path() + ".old", loaded_settings)
-		
+
 		loaded_settings["Settings version"] = user_settings["Settings version"]
-		
+
 		for key in loaded_settings:
 			if not key in user_settings.keys():
 				var _err = loaded_settings.erase(key)
@@ -38,11 +38,11 @@ func get_default() -> Dictionary:
 		"Typing sounds": true,
 		"New file opens file dialog": false,
 	}
-	
+
 
 func set_setting(key: String, value) -> void:
 	user_settings[key] = value
-	
+
 
 func get_setting(key):
 	if user_settings.has(key):
@@ -51,17 +51,16 @@ func get_setting(key):
 		user_settings[key] = get_default()[key]
 		write_settings()
 		return user_settings[key]
-	
+
 
 func set_settings(data: Dictionary) -> void:
 	for key in data:
 		if key in user_settings.keys():
 			user_settings[key] = data[key]
-	
+
 
 func get_settings() -> Dictionary:
 	return user_settings
-	
 
 
 func write_settings(file_path := _get_settings_file_path(), data := user_settings) -> void:
@@ -70,7 +69,7 @@ func write_settings(file_path := _get_settings_file_path(), data := user_setting
 	file.store_string(JSON.print(data, "\t", true))
 	file.close()
 	emit_signal("settings_written")
-	
+
 
 func _settings_file_exist() -> bool:
 	var file = File.new()

@@ -1,6 +1,6 @@
 extends Popup
 
-const _setting_scn :PackedScene = preload("res://falling_writer/components/setting.tscn")
+const _setting_scn: PackedScene = preload("res://falling_writer/components/setting.tscn")
 
 var _items := {}
 

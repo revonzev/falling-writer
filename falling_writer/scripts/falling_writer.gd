@@ -25,7 +25,7 @@ func _on_TextEdit_gui_input(event: InputEvent) -> void:
 	if event is InputEventKey and event.pressed:
 		if UserSettings.get_setting("Falling box") and event.unicode > 20 and event.unicode < 126:
 			_instance_falling_box(char(event.unicode))
-		
+
 		if UserSettings.get_setting("Typing sounds"):
 			_audio.stream = _typing_sounds[randi() % _typing_sounds.size()]
 			_audio.play()
@@ -41,7 +41,7 @@ func _instance_falling_box(text: String):
 	FallingLabelBox.position.x = rand_range(0, OS.window_size.x)
 	FallingLabelBox.position.y = -FallingLabelBox.get_node("ColorRect").rect_size.x / 2
 
-	_node_2d.add_child(FallingLabelBox)	
+	_node_2d.add_child(FallingLabelBox)
 
 
 func _update_word_count() -> void:
@@ -49,7 +49,7 @@ func _update_word_count() -> void:
 	var _err = regex.compile("\\S+")
 	var result := regex.search_all(_text_edit.text)
 	_word_count.text = str(result.size())
-	
-	
+
+
 func _update_char_count() -> void:
 	_char_count.text = str(_text_edit.text.length())

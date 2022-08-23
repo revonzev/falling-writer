@@ -1,6 +1,6 @@
 extends ColorRect
 
-enum _BtnTypes {INCREASE, DECREASE, NEW, SAVE, LOAD, SETTINGS}
+enum _BtnTypes { INCREASE, DECREASE, NEW, SAVE, LOAD, SETTINGS }
 
 export(_BtnTypes) var _type
 export(Texture) var _icon_img_path
@@ -17,7 +17,7 @@ func _ready() -> void:
 	_settings_changed()
 
 	$Sprite.texture = _icon_img_path
-	
+
 	match _type:
 		_BtnTypes.INCREASE:
 			hint_tooltip = "Increase Text Size (CTRL+-)"
@@ -31,7 +31,7 @@ func _ready() -> void:
 			hint_tooltip = "Load File (CTRL+O)"
 		_BtnTypes.SETTINGS:
 			hint_tooltip = "Open Settings Menu (ESC)"
-		
+
 	_resize_font(UserSettings.get_setting("Text editor font size"))
 
 
@@ -56,7 +56,7 @@ func _unhandled_input(event):
 		_resize_font(int(max(4, UserSettings.get_setting("Text editor font size") - 4)))
 	elif event.is_action_pressed("increase_font_size") and _type == _BtnTypes.INCREASE:
 		_sprite_pressed_effect()
-		_resize_font(UserSettings.get_setting("Text editor font size")+4)
+		_resize_font(UserSettings.get_setting("Text editor font size") + 4)
 	elif event.is_action_pressed("open_settings") and _type == _BtnTypes.SETTINGS:
 		if _settings_screen.visible:
 			_settings_screen.hide()
@@ -123,14 +123,11 @@ func _on_FileDialog_file_selected(path: String) -> void:
 	_file_path = path
 
 
-
 func _on_TextEditFontResize_gui_input(event: InputEvent) -> void:
-	if event is InputEventMouseButton \
-			and event.get_button_index() == 1 \
-			and event.pressed:
+	if event is InputEventMouseButton and event.get_button_index() == 1 and event.pressed:
 		match _type:
 			_BtnTypes.INCREASE:
-				_resize_font(UserSettings.get_setting("Text editor font size")+4)
+				_resize_font(UserSettings.get_setting("Text editor font size") + 4)
 			_BtnTypes.DECREASE:
 				_resize_font(int(max(4, UserSettings.get_setting("Text editor font size") - 4)))
 			_BtnTypes.NEW:
