@@ -13,7 +13,7 @@ polygon = PoolVector2Array( -20, -20, 20, -20, 20, 20, -20, 20 )
 size = 24
 font_data = ExtResource( 1 )
 
-[node name="FallingLabelBox" type="RigidBody2D"]
+[node name="FallingLabelBox" type="RigidBody2D" groups=["falling_box"]]
 light_mask = 2
 can_sleep = false
 script = ExtResource( 2 )

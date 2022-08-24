@@ -22,3 +22,11 @@ func _window_updated():
 func _settings_changed():
 	UserSettings.set_setting("Sun", clamp(UserSettings.get_setting("Sun"), 0, 16))
 	_sun.energy = UserSettings.get_setting("Sun")
+
+
+func _input(event):
+	if event is InputEventMouseButton and event.button_index == BUTTON_LEFT and event.is_pressed():
+		var body = $Mouse.get_overlapping_falling_box_body()
+
+		if body:
+			body.queue_free()
