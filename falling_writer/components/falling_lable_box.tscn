@@ -1,8 +1,10 @@
-[gd_scene load_steps=8 format=2]
+[gd_scene load_steps=12 format=2]
 
 [ext_resource path="res://fonts/Roboto-Regular.ttf" type="DynamicFontData" id=1]
 [ext_resource path="res://falling_writer/scripts/falling_lable_box.gd" type="Script" id=2]
 [ext_resource path="res://falling_writer/scripts/any_falling_box_in_area.gd" type="Script" id=3]
+[ext_resource path="res://falling_writer/assets/sounds/explosion.sfxr" type="AudioStream" id=4]
+[ext_resource path="res://falling_writer/assets/explosion.png" type="Texture" id=5]
 
 [sub_resource type="RectangleShape2D" id=2]
 extents = Vector2( 20, 20 )
@@ -10,12 +12,60 @@ extents = Vector2( 20, 20 )
 [sub_resource type="OccluderPolygon2D" id=4]
 polygon = PoolVector2Array( -20, -20, 20, -20, 20, 20, -20, 20 )
 
-[sub_resource type="CircleShape2D" id=5]
-radius = 150.0
-
 [sub_resource type="DynamicFont" id=3]
 size = 24
 font_data = ExtResource( 1 )
+
+[sub_resource type="CircleShape2D" id=5]
+radius = 150.0
+
+[sub_resource type="Animation" id=7]
+length = 1.65
+loop = true
+tracks/0/type = "method"
+tracks/0/path = NodePath("..")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/keys = {
+"times": PoolRealArray( 0.0501277, 1.35013 ),
+"transitions": PoolRealArray( 1, 1 ),
+"values": [ {
+"args": [  ],
+"method": "hide_box"
+}, {
+"args": [  ],
+"method": "queue_free"
+} ]
+}
+tracks/1/type = "value"
+tracks/1/path = NodePath("Sprite:frame")
+tracks/1/interp = 1
+tracks/1/loop_wrap = false
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/keys = {
+"times": PoolRealArray( 0.000127668, 0.150128, 0.300128, 0.450128, 0.600128, 0.750128, 0.900128, 1.05013, 1.20013, 1.35013 ),
+"transitions": PoolRealArray( 1, 1, 1, 1, 1, 1, 1, 1, 1, 1 ),
+"update": 1,
+"values": [ 1.0, 2.0, 3.0, 4.0, 5.0, 6.0, 7.0, 8.0, 9.0, 0.0 ]
+}
+
+[sub_resource type="Animation" id=9]
+length = 0.001
+tracks/0/type = "value"
+tracks/0/path = NodePath("Sprite:frame")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/keys = {
+"times": PoolRealArray( 0 ),
+"transitions": PoolRealArray( 1 ),
+"update": 1,
+"values": [ 0 ]
+}
 
 [node name="FallingLabelBox" type="RigidBody2D" groups=["falling_box"]]
 light_mask = 2
@@ -30,19 +80,6 @@ shape = SubResource( 2 )
 light_mask = 2
 occluder = SubResource( 4 )
 light_mask = 2
-
-[node name="Explosion" type="Node2D" parent="."]
-unique_name_in_owner = true
-
-[node name="Area2D" type="Area2D" parent="Explosion"]
-script = ExtResource( 3 )
-
-[node name="CollisionShape2D" type="CollisionShape2D" parent="Explosion/Area2D"]
-shape = SubResource( 5 )
-
-[node name="VisibilityNotifier2D" type="VisibilityNotifier2D" parent="."]
-position = Vector2( 6.55651e-07, -1.3113e-06 )
-scale = Vector2( 2, 2 )
 
 [node name="ColorRect" type="ColorRect" parent="."]
 light_mask = 2
@@ -60,9 +97,36 @@ custom_fonts/font = SubResource( 3 )
 text = "x"
 align = 1
 valign = 1
+
+[node name="Explosion" type="Node2D" parent="."]
+
+[node name="Area2D" type="Area2D" parent="Explosion"]
+script = ExtResource( 3 )
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Explosion/Area2D"]
+shape = SubResource( 5 )
+
+[node name="Sprite" type="Sprite" parent="Explosion"]
+scale = Vector2( 3, 3 )
+texture = ExtResource( 5 )
+hframes = 4
+vframes = 3
 __meta__ = {
-"_edit_use_anchors_": false
+"_edit_lock_": true,
+"_editor_description_": "YXNlcHJpdGVfd2l6YXJkX2NvbmZpZwpwbGF5ZXJ8PUV4cGxvc2lvbi9BbmltYXRpb25QbGF5ZXIKc291cmNlfD1yZXM6Ly9mYWxsaW5nX3dyaXRlci9hc3NldHMvZXhwbG9zaW9uLmFzZXByaXRlCmxheWVyfD0Kb3BfZXhwfD1GYWxzZQpvX2ZvbGRlcnw9Cm9fbmFtZXw9Cm9ubHlfdmlzaWJsZXw9RmFsc2UKb19leF9wfD0K"
 }
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="Explosion"]
+anims/Explosion = SubResource( 7 )
+anims/RESET = SubResource( 9 )
+
+[node name="AudioStreamPlayer2D" type="AudioStreamPlayer2D" parent="Explosion"]
+stream = ExtResource( 4 )
+volume_db = 15.0
+
+[node name="VisibilityNotifier2D" type="VisibilityNotifier2D" parent="."]
+position = Vector2( 6.55651e-07, -1.3113e-06 )
+scale = Vector2( 2, 2 )
 
 [node name="Timer" type="Timer" parent="."]
 wait_time = 10.0

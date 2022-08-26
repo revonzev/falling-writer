@@ -21,6 +21,7 @@ _global_script_class_icons={
 [application]
 
 config/name="Falling Writer"
+config/description="No Description"
 run/main_scene="res://falling_writer/windows/falling_writer.tscn"
 boot_splash/show_image=false
 boot_splash/bg_color=Color( 0.164706, 0.176471, 0.203922, 1 )
@@ -33,7 +34,7 @@ UserSettings="*res://falling_writer/scripts/user_settings.gd"
 
 [editor_plugins]
 
-enabled=PoolStringArray(  )
+enabled=PoolStringArray( "res://addons/AsepriteWizard/plugin.cfg", "res://addons/gdfxr/plugin.cfg" )
 
 [global]
 

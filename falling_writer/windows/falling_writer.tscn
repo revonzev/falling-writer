@@ -176,6 +176,7 @@ theme = ExtResource( 17 )
 
 [node name="SettingsScreen" parent="Infont" instance=ExtResource( 19 )]
 unique_name_in_owner = true
+visible = false
 
 [node name="FileDialog" type="FileDialog" parent="Infont"]
 unique_name_in_owner = true
