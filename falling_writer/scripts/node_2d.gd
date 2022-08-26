@@ -26,7 +26,7 @@ func _settings_changed():
 
 func _input(event):
 	if event is InputEventMouseButton and event.button_index == BUTTON_LEFT and event.is_pressed():
-		var body = $Mouse.get_overlapping_falling_box_body()
+		var body: RigidBody2D = $Mouse.get_overlapping_falling_box_body()
 
 		if body:
-			body.queue_free()
+			body.explode()

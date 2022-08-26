@@ -8,6 +8,16 @@
 
 config_version=4
 
+_global_script_classes=[ {
+"base": "Area2D",
+"class": "AnyFallingBoxInArea",
+"language": "GDScript",
+"path": "res://falling_writer/scripts/any_falling_box_in_area.gd"
+} ]
+_global_script_class_icons={
+"AnyFallingBoxInArea": ""
+}
+
 [application]
 
 config/name="Falling Writer"
