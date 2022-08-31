@@ -1,4 +1,4 @@
-[gd_scene load_steps=17 format=2]
+[gd_scene load_steps=18 format=2]
 
 [ext_resource path="res://falling_writer/assets/file_upload.svg" type="Texture" id=1]
 [ext_resource path="res://falling_writer/assets/sounds/typing/typing_1.wav" type="AudioStream" id=2]
@@ -15,6 +15,10 @@
 [ext_resource path="res://falling_writer/themes/dark.tres" type="Theme" id=17]
 [ext_resource path="res://falling_writer/assets/cog.png" type="Texture" id=18]
 [ext_resource path="res://falling_writer/components/settings_screen.tscn" type="PackedScene" id=19]
+
+[sub_resource type="Environment" id=2]
+background_mode = 4
+glow_enabled = true
 
 [sub_resource type="RectangleShape2D" id=1]
 extents = Vector2( 512, 10 )
@@ -150,6 +154,9 @@ valign = 1
 [node name="Node2D" type="Node2D" parent="."]
 unique_name_in_owner = true
 script = ExtResource( 12 )
+
+[node name="WorldEnvironment" type="WorldEnvironment" parent="Node2D"]
+environment = SubResource( 2 )
 
 [node name="WindowFloor" type="StaticBody2D" parent="Node2D"]
 position = Vector2( 512, 610 )
