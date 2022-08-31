@@ -29,4 +29,7 @@ func _input(event):
 		var body: RigidBody2D = $Mouse.get_overlapping_falling_box_body()
 
 		if body:
-			body.explode()
+			if UserSettings.get_setting("Falling box explosion"):
+				body.explode()
+			else:
+				body.queue_free()
